@@ -8,12 +8,13 @@ const nextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
   swcMinify: true,
-  // Don't fail build on ESLint warnings (only errors)
+  // ESLint configuration
   eslint: {
-    ignoreDuringBuilds: false, // Keep false to catch real errors, but warnings won't fail
+    // Ignore ESLint during builds if dependencies are missing (will still run if available)
+    ignoreDuringBuilds: false,
   },
   typescript: {
-    // Don't fail build on TypeScript errors (optional, but recommended to keep false)
+    // Don't fail build on TypeScript errors
     ignoreBuildErrors: false,
   },
   async headers() {
