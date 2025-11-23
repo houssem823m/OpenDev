@@ -97,3 +97,5 @@ UPLOADTHING_APP_ID=<get-from-uploadthing-dashboard>
 
 **Fix MONGODB_URI and get UploadThing credentials, then you're done!** ✅
 
+
+
