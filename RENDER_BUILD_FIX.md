@@ -1,85 +1,50 @@
-# Fix for Render Build Error
+# Fix for Render Build - Missing Dependencies
 
 ## Problem
 
-Render is trying to use Docker (or there's a build issue) and can't find the `app` directory during build.
+Render is not installing devDependencies during build, causing:
+- ESLint not found
+- @types/jsonwebtoken not found
 
-## Solution 1: Ensure Render Uses Node.js (Not Docker)
+## Solution
 
-### Step 1: Check Render Configuration
+### Option 1: Update Build Command in Render Dashboard (Recommended)
 
-1. Go to https://dashboard.render.com
-2. Click on your `opendev` service
-3. Go to **"Settings"** tab
-4. Scroll to **"Docker"** section
-5. **Make sure "Docker" is NOT enabled**
-6. It should say **"Native"** or **"Node"**
+1. Go to Render dashboard → Your service → **Settings**
+2. Find **"Build Command"**
+3. Change from:
+   ```
+   npm install && npm run build
+   ```
+   To:
+   ```
+   npm ci && npm run build
+   ```
+4. **Save** and redeploy
 
-### Step 2: Verify Build Settings
+### Option 2: Use npm install with --include=dev
 
-In Render dashboard → Your service → **"Settings"**:
-
-- **Build Command**: `npm install && npm run build`
-- **Start Command**: `npm start`
-- **Environment**: `Node`
-
-**NOT:**
-- ❌ Don't use Docker
-- ❌ Don't use `docker-compose`
-
-## Solution 2: If Using Docker (Not Recommended for Render)
-
-If you must use Docker, the Dockerfile has been fixed. But **Render works better with native Node.js builds**.
-
-## Solution 3: Clear Build Cache
-
-1. Go to Render dashboard → Your service
-2. Click **"Manual Deploy"**
-3. Select **"Clear build cache & deploy"**
-4. Click **"Deploy latest commit"**
-
-## Recommended: Use Native Node.js Build
-
-**For Render, use these settings:**
-
-### Build Configuration:
+Change build command to:
 ```
-Build Command: npm install && npm run build
-Start Command: npm start
-Environment: Node
-Node Version: 20.x (or latest)
+npm install --include=dev && npm run build
 ```
 
-### Don't Use:
-- ❌ Docker
-- ❌ Dockerfile
-- ❌ docker-compose.yml
+### Why This Happens
 
-## Why This Happens
+- `npm install` in production mode (NODE_ENV=production) skips devDependencies
+- `npm ci` installs all dependencies including devDependencies
+- ESLint and TypeScript types are in devDependencies and needed for build
 
-The error occurs because:
-1. Render might be detecting `Dockerfile` and trying to use it
-2. Or there's a cached build configuration
-3. The Dockerfile tries to build before copying source code
+## Updated render.yaml
 
-## Quick Fix
+The `render.yaml` file has been updated to use `npm ci` instead of `npm install`.
 
-1. **Disable Docker in Render settings**
-2. **Use native Node.js build**
-3. **Clear build cache**
-4. **Redeploy**
+## After Fixing
 
-## Verify Fix
-
-After redeploying, check logs:
-- Should see: `npm install` running
-- Then: `npm run build` running
-- Then: `npm start` running
-- Should see: `Ready on http://localhost:XXXX`
-
-**No Docker errors!**
+1. Update build command in Render dashboard
+2. Or push the updated `render.yaml` and redeploy
+3. Build should now succeed
 
 ---
 
-**The `.renderignore` file has been created to prevent Render from using Docker files.**
-
+**The build command has been updated in render.yaml. Update it in Render dashboard or redeploy!**
