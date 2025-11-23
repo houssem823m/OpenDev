@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { z } from "zod";
@@ -20,7 +20,7 @@ const loginSchema = z.object({
 
 type LoginFormValues = z.infer<typeof loginSchema>;
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/admin";
@@ -144,6 +144,25 @@ export default function LoginPage() {
         </div>
       </div>
     </Container>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={
+      <Container>
+        <div className="min-h-screen py-12 flex items-center justify-center">
+          <div className="w-full max-w-md bg-card border border-border rounded-2xl p-8 shadow-soft">
+            <div className="text-center">
+              <Loader2 className="w-8 h-8 animate-spin mx-auto mb-4 text-primary" />
+              <p className="text-muted-foreground">Chargement...</p>
+            </div>
+          </div>
+        </div>
+      </Container>
+    }>
+      <LoginForm />
+    </Suspense>
   );
 }
 
