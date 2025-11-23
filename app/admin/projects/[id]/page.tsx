@@ -1,6 +1,5 @@
 "use client";
 
-import { use } from "react";
 import { useRouter } from "next/navigation";
 import useSWR from "swr";
 import { useForm } from "react-hook-form";
@@ -28,11 +27,11 @@ import {
 import { ProjectImage } from "@/types";
 
 interface EditProjectPageProps {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }
 
 export default function EditProjectPage({ params }: EditProjectPageProps) {
-  const { id } = use(params);
+  const { id } = params;
   const router = useRouter();
   const [mainImageUrl, setMainImageUrl] = useState<string>("");
   const [isUploading, setIsUploading] = useState(false);

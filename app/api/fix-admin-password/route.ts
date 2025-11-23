@@ -80,6 +80,7 @@ export async function GET(request: NextRequest) {
     // Check current password
     const currentPasswordValid = await bcrypt.compare(password, user.password);
     console.log(`🔑 [FIX-ADMIN] Current password test: ${currentPasswordValid ? "VALID" : "INVALID"}`);
+    console.log(`🔑 [FIX-ADMIN] Current hash: ${user.password.substring(0, 30)}...`);
 
     // Generate new password hash
     const hashedPassword = await bcrypt.hash(password, 10);

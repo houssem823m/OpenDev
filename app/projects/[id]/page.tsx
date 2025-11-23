@@ -1,6 +1,5 @@
 "use client";
 
-import { use } from "react";
 import useSWR from "swr";
 import Container from "@/components/Container";
 import ProjectGallery from "@/components/ProjectGallery";
@@ -12,11 +11,11 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 
 interface ProjectPageProps {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }
 
 export default function ProjectPage({ params }: ProjectPageProps) {
-  const { id } = use(params);
+  const { id } = params;
   const [copied, setCopied] = useState(false);
 
   const { data: project, error: projectError, isLoading: projectLoading } = useSWR<Project>(

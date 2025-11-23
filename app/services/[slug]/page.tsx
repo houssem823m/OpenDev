@@ -1,6 +1,5 @@
 "use client";
 
-import { use } from "react";
 import useSWR from "swr";
 import Image from "next/image";
 import Container from "@/components/Container";
@@ -11,11 +10,11 @@ import { Service } from "@/types";
 import { useState } from "react";
 
 interface ServicePageProps {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }
 
 export default function ServicePage({ params }: ServicePageProps) {
-  const { slug } = use(params);
+  const { slug } = params;
   const [orderModalOpen, setOrderModalOpen] = useState(false);
 
   const { data: service, error, isLoading } = useSWR<Service>(

@@ -1,6 +1,5 @@
 "use client";
 
-import { use } from "react";
 import { useRouter } from "next/navigation";
 import useSWR from "swr";
 import { useForm } from "react-hook-form";
@@ -27,11 +26,11 @@ import {
 } from "@/components/ui/dialog";
 
 interface EditServicePageProps {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }
 
 export default function EditServicePage({ params }: EditServicePageProps) {
-  const { id } = use(params);
+  const { id } = params;
   const router = useRouter();
   const [imageUrl, setImageUrl] = useState<string>("");
   const [isUploading, setIsUploading] = useState(false);
