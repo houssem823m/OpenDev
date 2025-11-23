@@ -2,9 +2,28 @@
 
 Since Render Shell is a paid feature, here's how to fix the admin password without using the shell.
 
-## Solution: Use the API Endpoint
+## Solution 1: Use the Seed Endpoint (RECOMMENDED)
 
-I've created a temporary API endpoint that will fix the admin password for you.
+I've created a seed endpoint that will fix the admin password AND seed the database.
+
+### Step 1: Visit the Seed Endpoint
+
+Open this URL in your browser:
+
+```
+https://opendev.onrender.com/api/seed?secret=seed-2024
+```
+
+This will:
+- ✅ Fix the admin password (reset to "admin123")
+- ✅ Ensure admin settings are correct (isVerified: true, isBanned: false)
+- ✅ Create seed data (services, projects, site content)
+
+---
+
+## Solution 2: Use the Fix Password Endpoint
+
+If you only want to fix the password without seeding:
 
 ### Step 1: Visit the Fix Endpoint
 

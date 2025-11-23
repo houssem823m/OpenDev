@@ -16,38 +16,74 @@ import User from "@/lib/models/User";
  */
 export async function GET(request: NextRequest) {
   try {
-    // Security: Check for a secret token (optional but recommended)
+    console.log("🔧 [FIX-ADMIN] Endpoint called - fixing admin password...");
+    
+    // Simple security: Check for a secret token
     const secret = request.nextUrl.searchParams.get("secret");
     const expectedSecret = process.env.FIX_ADMIN_SECRET || "fix-admin-2024";
     
     if (secret !== expectedSecret) {
+      console.log("❌ [FIX-ADMIN] Unauthorized access attempt");
       return NextResponse.json(
         { 
-          error: "Unauthorized. Add ?secret=fix-admin-2024 to the URL" 
+          error: "Unauthorized",
+          message: "Add ?secret=fix-admin-2024 to the URL",
+          example: "https://opendev.onrender.com/api/fix-admin-password?secret=fix-admin-2024"
         },
         { status: 401 }
       );
     }
 
+    console.log("🔧 [FIX-ADMIN] Connecting to database...");
     await connectDB();
+    console.log("✅ [FIX-ADMIN] Database connected");
 
     const email = "admin@opendev.com";
     const password = "admin123";
 
     // Find admin user
+    console.log("🔍 [FIX-ADMIN] Looking for admin user...");
     const user = await User.findOne({ email: email.toLowerCase().trim() });
 
     if (!user) {
-      return NextResponse.json(
-        { 
-          error: "Admin user not found. Run npm run seed first." 
+      console.log("❌ [FIX-ADMIN] Admin user not found - creating new one...");
+      // Create admin user if it doesn't exist
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const newUser = await User.create({
+        name: "Admin User",
+        email: email.toLowerCase().trim(),
+        password: hashedPassword,
+        role: "admin",
+        isBanned: false,
+        isVerified: true,
+      });
+      
+      const isValid = await bcrypt.compare(password, newUser.password);
+      console.log(`✅ [FIX-ADMIN] Admin user created! Password test: ${isValid ? "VALID" : "INVALID"}`);
+      
+      return NextResponse.json({
+        success: true,
+        message: "Admin user created successfully!",
+        action: "created",
+        details: {
+          email: newUser.email,
+          role: newUser.role,
+          isVerified: newUser.isVerified,
+          isBanned: newUser.isBanned,
+          passwordTest: isValid ? "✅ VALID" : "❌ INVALID",
         },
-        { status: 404 }
-      );
+      });
     }
+
+    console.log("✅ [FIX-ADMIN] Admin user found, updating password...");
+    
+    // Check current password
+    const currentPasswordValid = await bcrypt.compare(password, user.password);
+    console.log(`🔑 [FIX-ADMIN] Current password test: ${currentPasswordValid ? "VALID" : "INVALID"}`);
 
     // Generate new password hash
     const hashedPassword = await bcrypt.hash(password, 10);
+    console.log("🔑 [FIX-ADMIN] Generated new password hash");
 
     // Update user
     user.password = hashedPassword;
@@ -55,9 +91,11 @@ export async function GET(request: NextRequest) {
     user.isBanned = false;
     user.role = "admin";
     await user.save();
+    console.log("✅ [FIX-ADMIN] User updated in database");
 
     // Verify the password works
     const isValid = await bcrypt.compare(password, user.password);
+    console.log(`🔑 [FIX-ADMIN] Final password test: ${isValid ? "✅ VALID" : "❌ INVALID"}`);
 
     return NextResponse.json({
       success: true,
