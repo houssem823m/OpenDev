@@ -96,13 +96,13 @@ In the Render dashboard, go to **Environment** tab and add:
 
 ```bash
 NODE_ENV=production
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/opendev?retryWrites=true&w=majority
-NEXTAUTH_SECRET=<generate-a-secure-random-string>
-NEXTAUTH_URL=https://your-app-name.onrender.com
-NEXT_PUBLIC_API_URL=https://your-app-name.onrender.com/api
-UPLOADTHING_SECRET=your-uploadthing-secret
-UPLOADTHING_APP_ID=your-uploadthing-app-id
-JWT_SECRET=<generate-a-secure-random-string>
+MONGODB_URI=mongodb+srv://opendev2023_db_user:m8vDLIvcWRq8BZHM@cluster0.exw6ywf.mongodb.net/opendev?retryWrites=true&w=majority
+NEXTAUTH_SECRET=<GENERATE-THIS-BELOW>
+NEXTAUTH_URL=https://opendev.onrender.com
+NEXT_PUBLIC_API_URL=https://opendev.onrender.com/api
+UPLOADTHING_SECRET=<GET-FROM-UPLOADTHING-DASHBOARD>
+UPLOADTHING_APP_ID=<GET-FROM-UPLOADTHING-DASHBOARD>
+JWT_SECRET=<GENERATE-THIS-BELOW>
 ```
 
 #### Optional Variables:

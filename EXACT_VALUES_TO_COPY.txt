@@ -1,0 +1,72 @@
+═══════════════════════════════════════════════════════════════
+  COPY THESE EXACT VALUES TO RENDER ENVIRONMENT VARIABLES
+═══════════════════════════════════════════════════════════════
+
+Go to: Render Dashboard → Your Service (opendev) → Environment Tab
+
+Then add each variable one by one:
+
+───────────────────────────────────────────────────────────────
+1. NODE_ENV
+───────────────────────────────────────────────────────────────
+production
+
+───────────────────────────────────────────────────────────────
+2. MONGODB_URI
+───────────────────────────────────────────────────────────────
+mongodb+srv://opendev2023_db_user:m8vDLIvcWRq8BZHM@cluster0.exw6ywf.mongodb.net/opendev?retryWrites=true&w=majority
+
+───────────────────────────────────────────────────────────────
+3. NEXTAUTH_URL
+───────────────────────────────────────────────────────────────
+https://opendev.onrender.com
+
+───────────────────────────────────────────────────────────────
+4. NEXT_PUBLIC_API_URL
+───────────────────────────────────────────────────────────────
+https://opendev.onrender.com/api
+
+───────────────────────────────────────────────────────────────
+5. NEXTAUTH_SECRET
+───────────────────────────────────────────────────────────────
+8cj8c0FNod09ME7YHVqcKIOU8HBNdhicQWlPUPl+u20=
+
+───────────────────────────────────────────────────────────────
+6. JWT_SECRET
+───────────────────────────────────────────────────────────────
+kxi6aEYtBoniJpAIzmyBqHCtd05SenAlk8WZaiZaLCc=
+
+───────────────────────────────────────────────────────────────
+7. UPLOADTHING_SECRET
+───────────────────────────────────────────────────────────────
+<GET-FROM-UPLOADTHING-DASHBOARD>
+
+───────────────────────────────────────────────────────────────
+8. UPLOADTHING_APP_ID
+───────────────────────────────────────────────────────────────
+<GET-FROM-UPLOADTHING-DASHBOARD>
+
+═══════════════════════════════════════════════════════════════
+  INSTRUCTIONS
+═══════════════════════════════════════════════════════════════
+
+1. Copy variables 1-5 above (they're ready to use)
+
+2. Generate JWT_SECRET:
+   Open PowerShell and run:
+   [Convert]::ToBase64String((1..32 | ForEach-Object { Get-Random -Maximum 256 }))
+   
+   Copy the output and use as JWT_SECRET
+
+3. Get UploadThing credentials:
+   - Go to: https://uploadthing.com/dashboard
+   - Create app (if needed)
+   - Copy Secret → UPLOADTHING_SECRET
+   - Copy App ID → UPLOADTHING_APP_ID
+
+4. Add all 8 variables to Render Environment tab
+
+5. Save and redeploy!
+
+═══════════════════════════════════════════════════════════════
+

@@ -39,6 +39,7 @@ interface SiteContent {
 
 export default function AdminContentPage() {
   const [isSaving, setIsSaving] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
 
   const { data, mutate } = useSWR<{ success: boolean; data: SiteContent }>(
     "content",
