@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion } from "framer-motion";
-import { Mail, Phone, Clock, Send, Loader2, MapPin } from "lucide-react";
+import { Mail, Phone, Clock, Send, Loader2 } from "lucide-react";
 import Container from "@/components/Container";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -55,8 +55,9 @@ export default function ContactPage() {
       await sendContactMessage(values);
       toast.success("Message envoyé avec succès! Nous vous répondrons dans les plus brefs délais.");
       reset();
-    } catch (error: any) {
-      toast.error(error.message || "Erreur lors de l'envoi du message");
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Erreur lors de l'envoi du message";
+      toast.error(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
@@ -77,7 +78,7 @@ export default function ContactPage() {
             <span className="text-foreground">nous</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Une question ? Un projet ? N'hésitez pas à nous contacter, nous serons ravis de vous répondre.
+            Une question ? Un projet ? N&apos;hésitez pas à nous contacter, nous serons ravis de vous répondre.
           </p>
         </motion.div>
 

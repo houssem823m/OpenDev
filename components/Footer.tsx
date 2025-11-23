@@ -1,7 +1,7 @@
 import Container from "@/components/Container";
 import Logo from "@/components/Logo";
 import Link from "next/link";
-import { Github, Linkedin, Mail, Phone } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 
 export default function Footer() {
   return (

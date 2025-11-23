@@ -170,7 +170,7 @@ export default function Home() {
               Prêt à Démarrer Votre Projet ?
             </h2>
             <p className="text-xl text-foreground/70">
-              Contactez-nous dès aujourd'hui pour discuter de vos besoins et obtenir un devis personnalisé.
+              Contactez-nous dès aujourd&apos;hui pour discuter de vos besoins et obtenir un devis personnalisé.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild size="lg" className="text-lg px-8 py-6">
