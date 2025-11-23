@@ -95,8 +95,8 @@ export default function AdminContentPage() {
     <div>
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-3xl font-bold">Gestion du contenu</h1>
-        <Button onClick={handleSave} disabled={isSaving}>
-          {isSaving ? "Sauvegarde..." : "Sauvegarder"}
+        <Button onClick={handleSave} disabled={isSaving || isUploading}>
+          {isSaving ? "Sauvegarde..." : isUploading ? "Upload en cours..." : "Sauvegarder"}
         </Button>
       </div>
 
@@ -154,6 +154,7 @@ export default function AdminContentPage() {
                 onClientUploadComplete={(res) => {
                   if (res && res[0]) {
                     setContent({ ...content, hero: { ...content.hero, image: res[0].url } });
+                    setIsUploading(false);
                     toast.success("Image uploadée!");
                   }
                 }}
