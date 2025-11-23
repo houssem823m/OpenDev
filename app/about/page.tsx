@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import useSWR from "swr";
 import Container from "@/components/Container";
 import { getContent } from "@/services/api";
@@ -137,7 +136,7 @@ export default function AboutPage() {
               <div>
                 <h3 className="font-bold text-lg mb-2">Excellence</h3>
                 <p className="text-muted-foreground">
-                  Nous visons l'excellence dans chaque projet, en utilisant les meilleures pratiques et technologies.
+                  Nous visons l&apos;excellence dans chaque projet, en utilisant les meilleures pratiques et technologies.
                 </p>
               </div>
             </div>
