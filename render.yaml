@@ -1,0 +1,48 @@
+services:
+  - type: web
+    name: opendev
+    env: node
+    plan: starter
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        value: mongodb+srv://opendev2023_db_user:m8vDLIvcWRq8BZHM@cluster0.exw6ywf.mongodb.net/opendev?retryWrites=true&w=majority
+      - key: NEXTAUTH_SECRET
+        generateValue: true
+      - key: NEXTAUTH_URL
+        value: https://opendev.onrender.com
+      - key: NEXT_PUBLIC_API_URL
+        value: https://opendev.onrender.com/api
+      - key: UPLOADTHING_SECRET
+        sync: false
+      - key: UPLOADTHING_APP_ID
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: SENDGRID_API_KEY
+        sync: false
+        optional: true
+      - key: SENDGRID_FROM_EMAIL
+        value: noreply@opendev.com
+        optional: true
+      - key: ADMIN_EMAIL
+        sync: false
+        optional: true
+      - key: REQUIRE_EMAIL_VERIFICATION
+        value: "false"
+      - key: NEXT_PUBLIC_SENTRY_DSN
+        sync: false
+        optional: true
+      - key: SENTRY_ORG
+        sync: false
+        optional: true
+      - key: SENTRY_PROJECT
+        sync: false
+        optional: true
+      - key: SENTRY_AUTH_TOKEN
+        sync: false
+        optional: true
+
