@@ -1,4 +1,3 @@
-import dotenv from "dotenv";
 import { config } from "dotenv";
 import { resolve } from "path";
 
@@ -18,6 +17,10 @@ if (!secret || !appId) {
   process.exit(1);
 }
 
+// At this point, TypeScript knows secret and appId are defined, but we need to assert it
+const uploadthingSecret: string = secret!;
+const uploadthingAppId: string = appId!;
+
 // Test prepareUpload endpoint
 async function testPrepareUpload() {
   try {
@@ -27,7 +30,7 @@ async function testPrepareUpload() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "x-uploadthing-api-key": secret,
+        "x-uploadthing-api-key": uploadthingSecret,
         "x-uploadthing-version": "7.0.0",
       },
       body: JSON.stringify({
