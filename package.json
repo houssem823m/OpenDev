@@ -16,23 +16,27 @@
     "create-admin": "tsx scripts/create-admin.ts",
     "verify-admin": "tsx scripts/verify-and-fix-admin.ts",
     "diagnose-auth": "tsx scripts/diagnose-auth.ts",
-    "generate-hash": "tsx scripts/generate-password-hash.ts"
+    "generate-hash": "tsx scripts/generate-password-hash.ts",
+    "test-uploadthing": "tsx scripts/test-uploadthing.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.0",
     "@radix-ui/react-dialog": "^1.0.5",
     "@sendgrid/mail": "^8.1.0",
     "@sentry/nextjs": "^7.91.0",
+    "@types/jsonwebtoken": "^9.0.5",
     "@types/node": "^20.11.0",
     "@types/react": "^18.3.0",
     "@types/react-dom": "^18.3.0",
-    "@uploadthing/react": "^6.0.0",
+    "@uploadthing/react": "^7.3.3",
     "autoprefixer": "^10.4.0",
     "axios": "^1.6.0",
     "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "dotenv": "^17.2.3",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^14.2.0",
     "framer-motion": "^11.0.0",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.344.0",
@@ -50,11 +54,8 @@
     "tailwindcss": "^3.4.0",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.4.0",
-    "uploadthing": "^6.0.0",
-    "zod": "^3.22.0",
-    "@types/jsonwebtoken": "^9.0.5",
-    "eslint": "^8.57.0",
-    "eslint-config-next": "^14.2.0"
+    "uploadthing": "^7.7.4",
+    "zod": "^3.22.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.41.0",
