@@ -5,6 +5,7 @@ import { Toaster } from "react-hot-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Providers } from "./providers";
+import KeepAlive from "@/components/KeepAlive";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -32,6 +33,7 @@ export default function RootLayout({
     <html lang="en" className={`${poppins.variable} ${nunito.variable}`}>
       <body>
         <Providers>
+          <KeepAlive />
           <Navbar />
           <main>{children}</main>
           <Footer />
